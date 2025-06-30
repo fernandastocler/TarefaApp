@@ -1,0 +1,77 @@
+{
+  "Version": 1,
+  "Hash": "r8pgBKR+YJ6StcoRt08N2/5LPq75ZWV/4D9ThRbvpMc=",
+  "Source": "TarefasApi",
+  "BasePath": "_content/TarefasApi",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "TarefasApi\\wwwroot",
+      "Source": "TarefasApi",
+      "ContentRoot": "C:\\Users\\Alunos\\Downloads\\fernanda\\TarefaApp\\wwwroot\\",
+      "BasePath": "_content/TarefasApi",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\Alunos\\Downloads\\fernanda\\TarefaApp\\wwwroot\\css\\site.css",
+      "SourceId": "TarefasApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Alunos\\Downloads\\fernanda\\TarefaApp\\wwwroot\\",
+      "BasePath": "_content/TarefasApi",
+      "RelativePath": "css/site.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\site.css"
+    },
+    {
+      "Identity": "C:\\Users\\Alunos\\Downloads\\fernanda\\TarefaApp\\wwwroot\\js\\site.js",
+      "SourceId": "TarefasApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Alunos\\Downloads\\fernanda\\TarefaApp\\wwwroot\\",
+      "BasePath": "_content/TarefasApi",
+      "RelativePath": "js/site.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\site.js"
+    },
+    {
+      "Identity": "C:\\Users\\Alunos\\Downloads\\fernanda\\TarefaApp\\wwwroot\\tarefas.html",
+      "SourceId": "TarefasApi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Alunos\\Downloads\\fernanda\\TarefaApp\\wwwroot\\",
+      "BasePath": "_content/TarefasApi",
+      "RelativePath": "tarefas.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\tarefas.html"
+    }
+  ]
+}

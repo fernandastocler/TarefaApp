@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Lista de Tarefas - Rosa Sofisticado</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+
+<style>
+  body {
+    background: #fff0f5;
+    font-family: 'Poppins', sans-serif;
+    color: #333;
+  }
+  h1, .card-header h5 {
+    color: #d63384;
+    font-weight: 700;
+  }
+  .card {
+    background-color: #fff;
+    border: 1px solid #f8d7da;
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(240, 136, 180, 0.2);
+  }
+  .btn-success {
+    background: linear-gradient(135deg, #ff9ff3, #f368e0);
+    border: none;
+    color: white;
+    font-weight: bold;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, #f78fb3, #e667af);
+    border: none;
+    color: white;
+    font-weight: bold;
+  }
+  .btn-danger {
+    background: linear-gradient(135deg, #ff6b81, #ff4757);
+    border: none;
+    color: white;
+    font-weight: bold;
+  }
+  .btn-secondary {
+    background-color: #f8bbd0;
+    color: #333;
+    border: none;
+    font-weight: bold;
+  }
+  .table thead {
+    background-color: #ff69b4;
+    color: white;
+  }
+  .table-striped tbody tr:nth-of-type(odd) {
+    background-color: #ffe4ec;
+  }
+  .table-hover tbody tr:hover {
+    background-color: #ffd6e5;
+  }
+  .badge.bg-success {
+    background-color: #e83e8c !important;
+  }
+  .badge.bg-warning {
+    background-color: #fce38a !important;
+    color: #333;
+  }
+  .form-control, .form-check-input {
+    border-radius: 10px;
+    border: 1px solid #f8a5c2;
+    box-shadow: 0 2px 5px rgba(255, 192, 203, 0.2);
+  }
+  .form-label {
+    color: #c44569;
+  }
+  button {
+    box-shadow: 0 2px 8px rgba(249, 168, 212, 0.4);
+    border-radius: 12px !important;
+  }
+</style>
+</head>
+<body>
+
+<div class="container py-5" style="max-width:700px;">
+
+  <h1 class="mb-4 text-primary fw-bold">Lista de Tarefas</h1>
+
+  <div class="card mb-5 shadow-sm">
+    <div class="card-header bg-dark text-white">
+      <h5 class="mb-0" id="form-title">Nova Tarefa</h5>
+    </div>
+    <div class="card-body">
+      <form id="task-form" novalidate>
+        <input type="hidden" id="task-id" value="0" />
+
+        <div class="mb-3">
+          <label for="task-title" class="form-label fw-semibold">Título</label>
+          <input type="text" id="task-title" class="form-control shadow-sm" placeholder="Digite o título da tarefa" required />
+          <div class="text-danger" id="title-error" style="display:none;">Por favor, informe o título.</div>
+        </div>
+
+        <div class="form-check mb-3">
+          <input type="checkbox" id="task-completed" class="form-check-input" />
+          <label class="form-check-label" for="task-completed">Concluída</label>
+        </div>
+
+        <button type="submit" class="btn btn-success shadow-sm">Salvar</button>
+        <button type="button" id="cancel-edit" class="btn btn-secondary ms-2 shadow-sm" style="display:none;">Cancelar</button>
+      </form>
+    </div>
+  </div>
+
+  <table class="table table-striped table-hover shadow-sm">
+    <thead class="table-dark">
+      <tr>
+        <th>Título</th>
+        <th style="width: 120px;">Concluída</th>
+        <th style="width: 150px;">Ações</th>
+      </tr>
+    </thead>
+    <tbody id="tasks-list">
+      <!-- Tarefas aparecem aqui -->
+    </tbody>
+  </table>
+
+</div>
+
+<script>
+  const taskForm = document.getElementById('task-form');
+  const taskIdInput = document.getElementById('task-id');
+  const taskTitleInput = document.getElementById('task-title');
+  const taskCompletedInput = document.getElementById('task-completed');
+  const tasksList = document.getElementById('tasks-list');
+  const formTitle = document.getElementById('form-title');
+  const cancelEditBtn = document.getElementById('cancel-edit');
+  const titleError = document.getElementById('title-error');
+
+  let tasks = [];
+
+  function renderTasks() {
+    tasksList.innerHTML = '';
+    if(tasks.length === 0) {
+      tasksList.innerHTML = `<tr><td colspan="3" class="text-center">Nenhuma tarefa cadastrada.</td></tr>`;
+      return;
+    }
+
+    tasks.forEach(task => {
+      const tr = document.createElement('tr');
+
+      tr.innerHTML = `
+        <td>${task.titulo}</td>
+        <td>
+          ${task.concluida 
+            ? '<span class="badge bg-success"><i class="bi bi-check-lg"></i> Sim</span>' 
+            : '<span class="badge bg-warning text-dark"><i class="bi bi-hourglass-split"></i> Não</span>'}
+        </td>
+        <td>
+          <button class="btn btn-sm btn-primary me-2" onclick="editTask(${task.id})">
+            <i class="bi bi-pencil-square"></i> Editar
+          </button>
+          <button class="btn btn-sm btn-danger" onclick="deleteTask(${task.id})">
+            <i class="bi bi-trash"></i> Excluir
+          </button>
+        </td>
+      `;
+      tasksList.appendChild(tr);
+    });
+  }
+
+  function resetForm() {
+    taskIdInput.value = 0;
+    taskTitleInput.value = '';
+    taskCompletedInput.checked = false;
+    formTitle.textContent = 'Nova Tarefa';
+    cancelEditBtn.style.display = 'none';
+    titleError.style.display = 'none';
+  }
+
+  function editTask(id) {
+    const task = tasks.find(t => t.id === id);
+    if (!task) return;
+    taskIdInput.value = task.id;
+    taskTitleInput.value = task.titulo;
+    taskCompletedInput.checked = task.concluida;
+    formTitle.textContent = 'Editar Tarefa';
+    cancelEditBtn.style.display = 'inline-block';
+  }
+
+  function deleteTask(id) {
+    if (!confirm('Confirma exclusão?')) return;
+    tasks = tasks.filter(t => t.id !== id);
+    renderTasks();
+    resetForm();
+  }
+
+  taskForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const titulo = taskTitleInput.value.trim();
+    const concluida = taskCompletedInput.checked;
+    const id = parseInt(taskIdInput.value);
+
+    if (!titulo) {
+      titleError.style.display = 'block';
+      return;
+    }
+    titleError.style.display = 'none';
+
+    if (id === 0) {
+      // Nova tarefa
+      const newId = tasks.length > 0 ? Math.max(...tasks.map(t => t.id)) + 1 : 1;
+      tasks.push({ id: newId, titulo, concluida });
+    } else {
+      // Edita tarefa existente
+      const task = tasks.find(t => t.id === id);
+      if (task) {
+        task.titulo = titulo;
+        task.concluida = concluida;
+      }
+    }
+
+    renderTasks();
+    resetForm();
+  });
+
+  cancelEditBtn.addEventListener('click', () => {
+    resetForm();
+  });
+
+  // Inicializa com lista vazia
+  renderTasks();
+</script>
+
+</body>
+</html>

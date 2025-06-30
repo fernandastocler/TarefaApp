@@ -1,0 +1,33 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\Alunos\\Downloads\\fernanda\\TarefaApp\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "C:\\Users\\Alunos\\Downloads\\fernanda\\TarefaApp\\wwwroot\\js\\site.js",
+      "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "C:\\Users\\Alunos\\Downloads\\fernanda\\TarefaApp\\wwwroot\\tarefas.html",
+      "PackagePath": "staticwebassets\\tarefas.html"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.TarefasApi.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.TarefasApi.props",
+      "PackagePath": "build\\TarefasApi.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.TarefasApi.props",
+      "PackagePath": "buildMultiTargeting\\TarefasApi.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.TarefasApi.props",
+      "PackagePath": "buildTransitive\\TarefasApi.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
